@@ -7,6 +7,7 @@ region_name=""
 gene_name=""
 exon_count=0
 cds_count=0
+exones=()
 
 while IFS=$'\t' read -r -a fields; do
     if [[ ! ${fields[0]} =~ ^# ]]; then
@@ -33,8 +34,30 @@ while IFS=$'\t' read -r -a fields; do
         elif [[ $feature_type == "CDS" ]]; then
             ((cds_count++))
         fi
+        #INICIO PARTE AGREGADA PARA TEST
+
+        #FIN PARTE AGREGADA PARA TEST
     fi
 done < "$file_path"
+##
+
+while IFS=$'\t' read -r fields; do
+    if [[ "$tipo_feature" == "exon" ]]; then
+      id=$(grep -oP 'ID=exon-\K[^.]+' <<< "$contenido_info")
+      if [[ ! " ${exones[@]} " =~ " ${id} " ]]; then
+        exones+=("$id")
+      fi
+    fi
+done < "$archivo"
+
+echo "Cantidad de exones diferentes: ${#exones[@]}"
+echo "Lista de exones diferentes:"
+for exon in "${exones[@]}"; do
+    echo "- $exon"
+done
+##
+echo "Largo de la lista de objetos diferentes: ${#exones[@]}"
+echo "----------------------------------------------------"
 
 echo "$region_name"
 echo "$gene_name"
