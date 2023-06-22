@@ -3,6 +3,21 @@
 import sys 
 import re
 
+"""
+TEST 1
+Seq : ATCGATCGATCGATCGATCG ATNGAT
+coincidencias]
+0 6
+Con solapamiento
+4 10
+8 14
+12 18 
+16 22
+20 26
+
+"""
+
+
 def main():
     if(len(sys.argv)!=3):
         print('Debe ejecutarse como ./degenerate_primer_alignment.py <Secuencia ADN> <Partidor Degenerado>')
