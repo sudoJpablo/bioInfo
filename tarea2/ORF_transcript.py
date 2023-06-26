@@ -31,6 +31,7 @@ def imprime(orf,cadena,signo,dict):
         print(f'{i} {cadena.find(i)} {len(i)} {signo} {transcripcion(i)}')
 
 def transcripcion(orf):
+    #Diccionario que guarda las transcripciones a proteina de cada codon
     diccionario={
         'GG[UCAGT]':'G',
         'GA[GA]':'E',
@@ -40,6 +41,7 @@ def transcripcion(orf):
         'AG[GA]':'R',
         'AG[CUT]':'S',
         'AA[GA]':'K',
+        'AA[CUT]':'N',
         'AC[UCAGT]':'T',
         'A[UT]G':'M',
         'A[UT][ACUT]':'I',
@@ -57,14 +59,16 @@ def transcripcion(orf):
         '[UT]GA':'',
         '[UT]GG':'W',        
     }
+    
     proteina = ''
-    """
-    cont=3
-    codones = diccionario.keys()
-    while(cont<=len(orf)):
-        codon = orf[cont-3:cont]
-        pos = 
-    """
+    for i in range(0, len(orf), 3):
+        codon = orf[i:i+3]
+        for codon_regex, aminoacido in diccionario.items():
+            if re.match(codon_regex, codon):
+                proteina += aminoacido
+                break  # Se encontró una coincidencia, se sale del bucle interno
+        else:
+            proteina += "?"  # Codón no reconocido, se utiliza "?" como marcador
     return proteina
 
 def main():
@@ -96,7 +100,7 @@ if __name__ == "__main__":
 secuencia
 AGATGCCTATGGATGTTAATGATTGAGTGATATAACG
 resultados
-ATGTTAATGATTGAGTGA 11   18  + MLMIE
+ATGTTAATGATTGAGTGA 12   18  + MLMIE
 ATGCCTATGGATGTTAATGATTGA    2   24  +   MPMDVND
 
 """
