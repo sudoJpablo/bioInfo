@@ -26,30 +26,66 @@ def obtener_hebra_negativa(secuencia):
     hebra_negativa = ''.join(complemento[base] for base in reversed(secuencia))
     return hebra_negativa
 
-def imprime(orf,cadena,signo):
+def imprime(orf,cadena,signo,dict):
     for i in orf:
         print(f'{i} {cadena.find(i)} {len(i)} {signo} {transcripcion(i)}')
 
 def transcripcion(orf):
-    return 'proteina'
+    diccionario={
+        'GG[UCAGT]':'G',
+        'GA[GA]':'E',
+        'GA[CUT]':'D',
+        'GC[UCAGT]':'A',
+        'G[UT][UCAGT]':'V',
+        'AG[GA]':'R',
+        'AG[CUT]':'S',
+        'AA[GA]':'K',
+        'AC[UCAGT]':'T',
+        'A[UT]G':'M',
+        'A[UT][ACUT]':'I',
+        'CG[UCAGT]':'R',
+        'CA[GA]':'Q',
+        'CA[CUT]':'H',
+        'CC[UCAGT]':'P',
+        'C[UT][UCAGT]':'L', 
+        '[UT][UT][UCT]':'F',
+        '[UT][UT][AG]':'L',
+        '[UT]C[UCAGT]':'S',
+        '[UT]A[UCT]':'Y',
+        '[UT]A[AG]':'',
+        '[UT]G[UCT]':'C',
+        '[UT]GA':'',
+        '[UT]GG':'W',        
+    }
+    proteina = ''
+    """
+    cont=3
+    codones = diccionario.keys()
+    while(cont<=len(orf)):
+        codon = orf[cont-3:cont]
+        pos = 
+    """
+    return proteina
 
 def main():
     if len(sys.argv) != 2:
-        print('Debe ejecutarse como ./ORF_transcript.py <Secuencia ADN>')
+        print('Debe ejecutarse como ./ORF_transcript.py <Secuencia>')
         sys.exit()
 
     secuenciaPositiva = sys.argv[1]
     stop = '(UAA|UAG|UGA|TAA|TAG|TGA)'
     secuenciaNegativa = obtener_hebra_negativa(secuenciaPositiva)
 
+    
+
     # marcos de lectura hebra positiva
     for i in range(3):
         orf = funcion(secuenciaPositiva[i:], stop)
-        if(orf!=[]):imprime(orf,secuenciaPositiva,'+')
+        if(orf!=[]):imprime(orf,secuenciaPositiva,'+',dict)
     # marcos de lectura hebra negativa
     for i in range(3):
         orf = funcion(secuenciaNegativa[i:], stop)
-        if(orf!=[]):imprime(orf,secuenciaNegativa,'-')
+        if(orf!=[]):imprime(orf,secuenciaNegativa,'-',dict)
         
         
 
