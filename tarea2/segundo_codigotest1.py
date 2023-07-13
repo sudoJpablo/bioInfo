@@ -1,5 +1,3 @@
-# Partidor Degenera y secuencia 
-# codigo obtenido de chatGPT3 -> Revisar
 
 #
 """

@@ -2,6 +2,14 @@
 # -*- coding: utf-8 -*-
 import sys
 import re
+"""
+#Tarea 2 
+#Grupo 
+- Andrade   , Jorge       - jorge.andrade01@alumnos.uach.cl 
+- Fuentes   , Sebastian   - sebastian.fuentes02@alumnos.uach.cl 
+- Pezo      , Juan Pablo  - juan.pezo@alumnos.uach.cl 
+- Pinilla   , Claudio     - claudio.pinilla@alumnos.uach.cl
+"""
 
 def funcion(cadena, fin):
     condicion= False #Cuando sea false no se agragaran elementos a orf
